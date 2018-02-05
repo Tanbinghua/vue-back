@@ -1,6 +1,6 @@
 # vue-back
 
-> A vue background project
+> A vue Background management project
 
 ## Build Setup
 
