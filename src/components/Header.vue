@@ -50,10 +50,10 @@ export default {
       this.$router.push('/')
     },
     message () {
-      console.log('message')
+      this.$message('message')
     },
     clear () {
-      console.log('clear')
+      this.$message('clear')
     }
   }
 }
