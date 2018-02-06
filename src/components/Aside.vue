@@ -22,15 +22,17 @@
           <span slot="title">导航一</span>
         </template>
         <el-menu-item-group title="vue论坛">
-          <el-menu-item index="forum">论坛主题</el-menu-item>
-          <el-menu-item index="newContent">新建主题</el-menu-item>
+          <el-menu-item :route="{path: '/forum'}" index="forum">论坛主题</el-menu-item>
+          <el-menu-item :route="{path: '/newContent'}" index="newContent">新建主题</el-menu-item>
         </el-menu-item-group>
-        <el-menu-item-group title="分组二">
-          <el-menu-item index="1-3">选项3</el-menu-item>
+        <el-menu-item-group title="编辑">
+          <el-menu-item index="form" :route="{path: '/form'}">表单</el-menu-item>
+          <el-menu-item index="editor" :route="{path: '/editor'}">编辑器</el-menu-item>
+          <el-menu-item index="markdown" :route="{path: '/markdown'}">markdown</el-menu-item>
         </el-menu-item-group>
         <el-submenu index="1-4">
-          <span slot="title">选项4</span>
-          <el-menu-item index="1-4-1">选项1</el-menu-item>
+          <span slot="title">选项1-4</span>
+          <el-menu-item index="1-4-1">选项1-4-1</el-menu-item>
         </el-submenu>
       </el-submenu>
       <el-menu-item index="2">

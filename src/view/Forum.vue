@@ -1,5 +1,5 @@
 <template>
-  <div class="chart">
+  <div class="chart" style="min-width: 1200px;">
     <el-form :inline="true" :model="screening">
       <el-form-item label="主题" class="back-left">
         <el-select v-model="screening.region" @change="handleTabChange">
@@ -18,7 +18,7 @@
         <el-input v-model="screening.tab" placeholder="请输入筛选内容"></el-input>
       </el-form-item>
     </el-form>
-    <el-table :data="tableData" style="min-width: 1200px;">
+    <el-table :data="tableData">
       <el-table-column label="类型" align="center" width="150">
         <template slot-scope="scope">
           <span class="back-tab com">{{scope.row.tab | formatTabs}}</span>
@@ -67,7 +67,7 @@
         <template slot-scope="scope">
           <el-button
             size="mini"
-            @click="handleEdit(scope.$index)">编辑</el-button>
+            @click="handleEdit(scope.row.id)">编辑</el-button>
           <el-button
             size="mini"
             type="danger"
@@ -81,7 +81,7 @@
       :page-count="totalPage"
       @current-change="handleCurrentChange"
       :current-page.sync="page"
-      style="margin-top: 20px;">
+      style="margin-top: 20px; text-align: center;">
     </el-pagination>
     <el-dialog :visible.sync="dialogVisible" center width="350px">
       <span slot="title" style="color: #dd6161; font-size: 20px;">
@@ -158,8 +158,8 @@ export default {
       })
       this.dialogVisible = false
     },
-    handleEdit (val) {
-      console.log(val)
+    handleEdit (id) {
+      this.$router.push({path: '/editor', query: {id: id}})
     },
     onSubmit () {
       console.log('submit')
