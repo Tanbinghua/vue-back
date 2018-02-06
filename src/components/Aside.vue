@@ -12,7 +12,7 @@
       :unique-opened="isOpen"
       mode="vertical"
       :class="{'back-active-ul': !isCollapse}"
-      :default-active="active"
+      :default-active="onRoutes"
       router>
       <el-submenu index="1">
         <template slot="title">
@@ -20,13 +20,13 @@
           <span slot="title">导航一</span>
         </template>
         <el-menu-item-group title="vue论坛">
-          <el-menu-item :route="{path: '/forum'}" index="/forum">论坛主题</el-menu-item>
-          <el-menu-item :route="{path: '/newContent'}" index="/newContent">新建主题</el-menu-item>
+          <el-menu-item :route="{path: '/forum'}" index="forum">论坛主题</el-menu-item>
+          <el-menu-item :route="{path: '/newContent'}" index="newContent">新建主题</el-menu-item>
         </el-menu-item-group>
         <el-menu-item-group title="编辑">
-          <el-menu-item index="/form" :route="{path: '/form'}">表单</el-menu-item>
-          <el-menu-item index="/editor" :route="{path: '/editor'}">编辑器</el-menu-item>
-          <el-menu-item index="/markdown" :route="{path: '/markdown'}">markdown</el-menu-item>
+          <el-menu-item index="form" :route="{path: '/form'}">表单</el-menu-item>
+          <el-menu-item index="editor" :route="{path: '/editor'}">编辑器</el-menu-item>
+          <el-menu-item index="markdown" :route="{path: '/markdown'}">markdown</el-menu-item>
         </el-menu-item-group>
         <el-submenu index="1-4">
           <span slot="title">选项1-4</span>
@@ -50,18 +50,13 @@ export default {
   data () {
     return {
       isCollapse: false,
-      isOpen: true,
-      active: '/forum'
+      isOpen: true
     }
   },
-  methods: {
-    changeActive () {
-      console.log(this.$route.path)
-      this.avtive = this.$route.path
+  computed: {
+    onRoutes () {
+      return this.$route.path.replace('/', '')
     }
-  },
-  watch: {
-    '$route': 'changeActive'
   }
 }
 </script>

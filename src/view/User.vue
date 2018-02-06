@@ -86,7 +86,6 @@ export default {
     getUser () {
       const self = this
       let url = this.$store.state.svrUrl + this.$route.path
-      console.log(this.$route.path)
       this.axios.get(url).then((res) => {
         self.user_info = res.data.data
       }).catch((res) => {

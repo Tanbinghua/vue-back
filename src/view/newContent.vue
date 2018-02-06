@@ -1,5 +1,5 @@
 <template>
   <div class="new">
-    newContent
+    <h1>暂未完成</h1>
   </div>
 </template>
