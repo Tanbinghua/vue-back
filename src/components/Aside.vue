@@ -57,7 +57,7 @@ export default {
   methods: {
     changeActive () {
       console.log(this.$route.path)
-      this.avtive = '/editor'
+      this.avtive = this.$route.path
     }
   },
   watch: {
