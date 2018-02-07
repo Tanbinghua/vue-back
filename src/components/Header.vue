@@ -57,7 +57,27 @@ export default {
     },
     clear () {
       this.$message('clear')
+    },
+    getInfo () {
+      let url = this.$store.state.svrUrl + '/user/' + localStorage.getItem('loginname')
+      const self = this
+      this.axios.get(url).then((res) => {
+        if (res.status === 200) {
+          self.user_info = res.data.data
+          this.$store.commit({
+            type: 'setUserInfo',
+            info: JSON.stringify(self.user_info)
+          })
+        } else {
+          console.log('Login: 请求用户数据失败')
+        }
+      }).catch((res) => {
+        console.log('Login: ', res)
+      })
     }
+  },
+  created () {
+    this.getInfo()
   }
 }
 </script>

@@ -6,9 +6,8 @@ Vue.use(Vuex)
 
 const state = {
   svrUrl: 'https://www.vue-js.com/api/v1/',
-  accesstoken: '',
-  loginname: '',
   user_info: {
+    loginname: '',
     avatar_url: '',
     create_at: '',
     score: 0

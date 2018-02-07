@@ -38,7 +38,10 @@ export default {
     }
   },
   created () {
-    this.$message('欢迎回来，管理员！')
+    let role = localStorage.getItem('loginname')
+      ? localStorage.getItem('loginname')
+      : '管理员'
+    this.$message('欢迎回来，' + role + '！')
   }
 }
 </script>

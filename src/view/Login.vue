@@ -66,15 +66,11 @@ export default {
             accesstoken: self.ruleForm.accessToken
           }).then((res) => {
             if (res.status === 200 && res.data.success) {
-              this.$store.commit({
-                type: 'setBaseInfo',
-                accesstoken: self.ruleForm.accessToken,
-                name: res.data.loginname
-              })
+              localStorage.setItem('accesstoken', self.ruleForm.accessToken)
+              localStorage.setItem('loginname', res.data.loginname)
               self.isLogin = true
               self.showMsg('登录成功', 'success')
               this.$router.push('/forum')
-              this.getInfo(res.data.loginname)
             } else {
               self.showMsg('登录失败，请检查token是否正确', 'error')
             }
@@ -93,23 +89,6 @@ export default {
       this.$message({
         message,
         type
-      })
-    },
-    getInfo (name) {
-      let url = this.$store.state.svrUrl + '/user/' + name
-      const self = this
-      this.axios.get(url).then((res) => {
-        if (res.status === 200) {
-          self.user_info = res.data.data
-          this.$store.commit({
-            type: 'setUserInfo',
-            info: JSON.stringify(self.user_info)
-          })
-        } else {
-          console.log('Login: 请求用户数据失败')
-        }
-      }).catch((res) => {
-        console.log('Login: ', res)
       })
     }
   }
