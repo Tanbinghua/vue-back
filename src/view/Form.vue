@@ -89,7 +89,7 @@ export default {
   methods: {
     getUser () {
       let id = this.$route.query.id
-      if (!id) return
+      if (!id) id = this.$store.state.user_info.loginname
       const self = this
       let url = this.$store.state.svrUrl + '/user/' + id
       this.axios.get(url).then((res) => {

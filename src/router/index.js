@@ -11,6 +11,7 @@ import NewContent from '../view/newContent'
 import Editor from '../view/Editor'
 import Form from '../view/Form'
 import Markdown from '../view/Markdown'
+import About from '../view/About'
 
 Vue.use(Router)
 
@@ -54,6 +55,11 @@ export default new Router({
           path: '/markdown',
           name: 'Markdown',
           component: Markdown
+        },
+        {
+          path: '/about',
+          name: 'About',
+          component: About
         }
       ]
     },

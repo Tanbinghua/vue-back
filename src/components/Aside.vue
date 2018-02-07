@@ -33,13 +33,15 @@
           <el-menu-item index="1-4-1">选项1-4-1</el-menu-item>
         </el-submenu>
       </el-submenu>
-      <el-menu-item index="2">
+      <el-menu-item
+        :index="'user/' + this.$store.state.user_info.loginname"
+        :route="{path: '/user/' + this.$store.state.user_info.loginname}">
         <i class="el-icon-menu"></i>
-        <span slot="title">导航二</span>
+        <span slot="title">用户</span>
       </el-menu-item>
-      <el-menu-item index="3">
+      <el-menu-item index="about" :route="{path: '/about'}">
         <i class="el-icon-setting"></i>
-        <span slot="title">导航三</span>
+        <span slot="title">关于</span>
       </el-menu-item>
     </el-menu>
   </div>
