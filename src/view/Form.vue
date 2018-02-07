@@ -126,7 +126,7 @@ export default {
 
 <style scoped>
 .back-form {
-  width: 630px;
+  width: 700px;
   border-radius: 5px;
   background-color: #fff;
   padding: 30px 15px 15px 15px;

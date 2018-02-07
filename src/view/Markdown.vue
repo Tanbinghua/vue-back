@@ -1,5 +1,5 @@
 <template>
-  <div class="markdown" style="margin-top: 20px;">
+  <div class="markdown" style="margin-top: 20px; width: 800px;">
     <markdown-editor></markdown-editor>
     <div style="margin-top:20px; text-align: center;">
       <el-button type="primary" @click="msg('已提交')">提交</el-button>

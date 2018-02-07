@@ -11,7 +11,7 @@ export default {
   name: 'error',
   methods: {
     toHome () {
-      this.$router.push('/home')
+      this.$router.push('/forum')
     }
   }
 }

@@ -3,19 +3,24 @@
     <div class="login">
       <h3 style="margin: 0 0 22px 0; text-align: center;">后台管理系统登录</h3>
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="back-form" label-position="right">
-        <el-form-item prop="account">
+        <el-form-item prop="account" v-if="!isToken">
           <el-input v-model="ruleForm.account" placeholder="请输入您的账号"></el-input>
         </el-form-item>
-        <el-form-item prop="password">
+        <el-form-item prop="password" v-if="!isToken">
           <el-input type="password" v-model="ruleForm.password" placeholder="请输入您的密码"></el-input>
+        </el-form-item>
+        <el-form-item prop="accessToken" v-if="isToken">
+          <el-input type="password" v-model="ruleForm.accessToken" placeholder="请输入您的token"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button @click="logIn('ruleForm')" class="back-btn">登录</el-button>
         </el-form-item>
       </el-form>
       <p class="tips">
-        <span style="float: left;"><el-button type="text">忘记密码？</el-button></span>
-        <span style="float: right;"><el-button type="text">立即注册！</el-button></span>
+        <span style="float: left;"><a href="https://www.vue-js.com/search_pass" target="_blank">忘记密码？</a></span>
+        <span><el-button type="text" v-if="!isToken" @click="isToken = !isToken">使用accesstoken登录</el-button></span>
+        <span><el-button type="text" v-if="isToken" @click="isToken = !isToken">使用账号密码登录</el-button></span>
+        <span style="float: right;"><a href="https://www.vue-js.com/signup" target="_blank">立即注册！</a></span>
       </p>
     </div>
   </div>
@@ -27,14 +32,22 @@ export default {
     return {
       ruleForm: {
         account: '',
-        password: ''
+        password: '',
+        accessToken: 'e079976d-9950-471f-9e08-c939c71916b1'
       },
+      user_info: {},
+      isLogin: false,
+      isToken: false,
       rules: {
         account: [
           {required: true, message: '请输入账号', trigger: 'blur'}
         ],
         password: [
           {required: true, message: '请输入密码', trigger: 'blur'}
+        ],
+        accessToken: [
+          {required: true, message: '请输入accessToken', trigger: 'blur'},
+          {len: 36, message: 'accessToken长度为36', trigger: 'blur'}
         ]
       }
     }
@@ -43,11 +56,60 @@ export default {
     logIn (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.$router.push('/forum')
+          // 社区并没有提供账号密码登录
+          // if (!this.isToken) {
+          //   this.$router.push('/forum')
+          // } else {
+          let url = this.$store.state.svrUrl + 'accesstoken'
+          const self = this
+          this.axios.post(url, {
+            accesstoken: self.ruleForm.accessToken
+          }).then((res) => {
+            if (res.status === 200 && res.data.success) {
+              this.$store.commit({
+                type: 'setBaseInfo',
+                accesstoken: self.ruleForm.accessToken,
+                name: res.data.loginname
+              })
+              self.isLogin = true
+              self.showMsg('登录成功', 'success')
+              this.$router.push('/forum')
+              this.getInfo(res.data.loginname)
+            } else {
+              self.showMsg('登录失败，请检查token是否正确', 'error')
+            }
+          }).catch((res) => {
+            console.log('Login: ', res)
+            self.showMsg('登录失败，token错误或服务器正忙', 'error')
+          })
+          // }
         } else {
-          console.log('error')
+          this.showMsg('登录失败，请重试', 'error')
           return false
         }
+      })
+    },
+    showMsg (message, type) {
+      this.$message({
+        message,
+        type
+      })
+    },
+    getInfo (name) {
+      let url = this.$store.state.svrUrl + '/user/' + name
+      const self = this
+      this.axios.get(url).then((res) => {
+        if (res.status === 200) {
+          self.user_info = res.data.data
+          this.$store.commit({
+            type: 'setUserInfo',
+            info: JSON.stringify(self.user_info)
+          })
+        } else {
+          console.log('Login: 请求用户数据失败')
+        }
+      }).catch((res) => {
+        console.log('Login: ', res)
       })
     }
   }
@@ -91,5 +153,14 @@ export default {
 
 .tips {
   margin: -25px 0 0 0;
+  text-align: center;
+}
+
+.tips a {
+  display: inline-block;
+  text-decoration: none;
+  color: #409EFF;
+  font-size: 14px;
+  margin-top: 10px;
 }
 </style>

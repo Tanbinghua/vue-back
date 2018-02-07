@@ -6,9 +6,9 @@
         <span class="title">vue-background</span>
       </el-col>
       <el-col :span="4" style="float: right;">
-        <el-dropdown trigger="click" class="back-dropdown" @command="handleCommand">
+        <el-dropdown trigger="hover" class="back-dropdown" @command="handleCommand">
           <el-badge is-dot class="back-badge el-dropdown-link">
-            <img src="../assets/logo.png" alt="avatar" class="avatar">
+            <img :src="user_info.avatar_url" :alt="user_info.loginname" class="avatar">
           </el-badge>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item class="clearfix" command="message">
@@ -30,7 +30,9 @@
 <script>
 export default {
   data () {
-    return {}
+    return {
+      user_info: this.$store.state.user_info
+    }
   },
   methods: {
     handleCommand (command) {
@@ -51,6 +53,7 @@ export default {
     },
     message () {
       this.$message('message')
+      console.log(this.$store.state.accesstoken)
     },
     clear () {
       this.$message('clear')

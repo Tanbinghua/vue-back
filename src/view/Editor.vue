@@ -1,5 +1,5 @@
 <template>
-  <div class="edit" style="margin-top: 20px;">
+  <div class="edit" style="margin-top: 20px; width: 800px;">
     <quill-editor v-model="content"></quill-editor>
     <div style="text-align: center; margin-top: 20px;">
       <el-button type="primary" @click="msg('已提交')">提交</el-button>
