@@ -85,7 +85,9 @@ export default {
   methods: {
     getUser () {
       const self = this
-      let url = this.$store.state.svrUrl + this.$route.path
+      let id = this.$route.query.id
+      if (!id) id = sessionStorage.getItem('loginname')
+      let url = this.$store.state.svrUrl + 'user/' + id
       this.axios.get(url).then((res) => {
         self.user_info = res.data.data
       }).catch((res) => {

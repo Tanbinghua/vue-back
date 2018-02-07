@@ -40,7 +40,7 @@
             <p>作者：{{scope.row.author.loginname}}</p>
             <img :src="scope.row.author.avatar_url" :alt="scope.row.author.loginname" width="50" height="50" style="margin-left: 50px;">
             <div slot="reference">
-              <router-link :to="{path: '/user/' + scope.row.author.loginname}"><el-tag size="medium">{{scope.row.author.loginname}}</el-tag></router-link>
+              <router-link :to="{path: '/user', query: {id: scope.row.author.loginname}}"><el-tag size="medium">{{scope.row.author.loginname}}</el-tag></router-link>
             </div>
           </el-popover>
         </template>

@@ -53,13 +53,12 @@ export default {
     },
     message () {
       this.$message('message')
-      console.log(this.$store.state.accesstoken)
     },
     clear () {
       this.$message('clear')
     },
     getInfo () {
-      let url = this.$store.state.svrUrl + '/user/' + localStorage.getItem('loginname')
+      let url = this.$store.state.svrUrl + '/user/' + sessionStorage.getItem('loginname')
       const self = this
       this.axios.get(url).then((res) => {
         if (res.status === 200) {
@@ -78,6 +77,7 @@ export default {
   },
   created () {
     this.getInfo()
+    console.log('Hello World')
   }
 }
 </script>

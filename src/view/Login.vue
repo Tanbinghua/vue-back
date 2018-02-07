@@ -66,8 +66,8 @@ export default {
             accesstoken: self.ruleForm.accessToken
           }).then((res) => {
             if (res.status === 200 && res.data.success) {
-              localStorage.setItem('accesstoken', self.ruleForm.accessToken)
-              localStorage.setItem('loginname', res.data.loginname)
+              sessionStorage.setItem('accesstoken', self.ruleForm.accessToken)
+              sessionStorage.setItem('loginname', res.data.loginname)
               self.isLogin = true
               self.showMsg('登录成功', 'success')
               this.$router.push('/forum')

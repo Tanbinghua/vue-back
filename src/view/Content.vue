@@ -9,7 +9,7 @@
         </div>
         <div class="back-label">
           <span>发布于&nbsp;{{ topic.create_at | formatDate }}</span>
-          <router-link :to="{path: '/user/' + topic.author.loginname}" class="back-link">
+          <router-link :to="{path: '/user', query: {id: topic.author.loginname}}" class="back-link">
             作者&nbsp;{{ topic.author.loginname }}
           </router-link>
           <span>{{ topic.visit_count }}&nbsp;次浏览</span>

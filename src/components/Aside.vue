@@ -17,7 +17,7 @@
       <el-submenu index="1">
         <template slot="title">
           <i class="el-icon-location"></i>
-          <span slot="title">导航一</span>
+          <span slot="title">主要功能</span>
         </template>
         <el-menu-item-group title="vue论坛">
           <el-menu-item :route="{path: '/forum'}" index="forum">论坛主题</el-menu-item>
@@ -33,9 +33,7 @@
           <el-menu-item index="1-4-1">选项1-4-1</el-menu-item>
         </el-submenu>
       </el-submenu>
-      <el-menu-item
-        :index="'user/' + this.$store.state.user_info.loginname"
-        :route="{path: '/user/' + this.$store.state.user_info.loginname}">
+      <el-menu-item index="user" :route="{path: '/user'}">
         <i class="el-icon-menu"></i>
         <span slot="title">用户</span>
       </el-menu-item>
