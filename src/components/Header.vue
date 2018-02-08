@@ -77,7 +77,6 @@ export default {
   },
   created () {
     this.getInfo()
-    console.log('Hello World')
   }
 }
 </script>

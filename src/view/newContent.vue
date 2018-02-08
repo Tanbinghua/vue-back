@@ -29,11 +29,45 @@ export default {
       screening: {
         region: 'share',
         title: ''
-      }
+      },
+      list: 0,
+      publish: false
     }
   },
   components: {
     quillEditor
+  },
+  methods: {
+    pubTopic () {
+      if (this.list === 0) {
+        this.tab = 'share'
+      } else if (this.list === 1) {
+        this.tab = 'ask'
+      } else if (this.list === 2) {
+        this.tab = 'job'
+      }
+      if (this.title.length >= 10 && this.content && this.accesstoken) {
+        let that = this
+        this.axios.post(this.$store.state.svrUrl + 'topics', {
+          accesstoken: that.accesstoken,
+          title: that.title,
+          tab: that.tab,
+          content: that.content
+        }).then((res) => {
+          that.title = ''
+          that.content = ''
+          that.tips = '发表成功！'
+          that.publish = true
+          setTimeout(() => {
+            that.publish = false
+          }, 1500)
+        }).catch((res) => {
+          that.publish = true
+        })
+      } else {
+        this.publish = true
+      }
+    }
   }
 }
 </script>
