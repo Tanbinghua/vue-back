@@ -4,7 +4,7 @@
       <h3 style="margin: 0 0 22px 0; text-align: center;">后台管理系统登录</h3>
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="back-form" label-position="right">
         <el-form-item prop="account" v-if="!isToken">
-          <el-input v-model="ruleForm.account" placeholder="请输入您的账号"></el-input>
+          <el-input v-model="ruleForm.account" placeholder="请输入您的账号" v-focus></el-input>
         </el-form-item>
         <el-form-item prop="password" v-if="!isToken">
           <el-input type="password" v-model="ruleForm.password" placeholder="请输入您的密码"></el-input>
@@ -90,6 +90,13 @@ export default {
         message,
         type
       })
+    }
+  },
+  directives: {
+    focus: {
+      inserted (el) {
+        el.focus()
+      }
     }
   }
 }

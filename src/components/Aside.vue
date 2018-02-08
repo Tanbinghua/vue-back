@@ -26,7 +26,6 @@
         <el-menu-item-group title="编辑">
           <el-menu-item index="form" :route="{path: '/form'}">表单</el-menu-item>
           <el-menu-item index="editor" :route="{path: '/editor'}">编辑器</el-menu-item>
-          <el-menu-item index="markdown" :route="{path: '/markdown'}">markdown</el-menu-item>
         </el-menu-item-group>
         <el-submenu index="1-4">
           <span slot="title">选项1-4</span>
