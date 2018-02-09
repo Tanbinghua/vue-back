@@ -38,8 +38,8 @@ export default {
     }
   },
   created () {
-    let role = localStorage.getItem('loginname')
-      ? localStorage.getItem('loginname')
+    let role = sessionStorage.getItem('loginname')
+      ? sessionStorage.getItem('loginname')
       : '管理员'
     this.$message('欢迎回来，' + role + '！')
   }

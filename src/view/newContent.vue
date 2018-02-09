@@ -80,7 +80,7 @@ export default {
       }
     },
     msg (val) {
-      this.$message(this.content)
+      this.$message(val)
     }
   }
 }

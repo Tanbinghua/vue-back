@@ -23,7 +23,7 @@
         <p>共&nbsp;{{topic.reply_count}}&nbsp;条回复</p>
         <div v-for="(reply, index) in topic.replies" :key="reply.id" class="back-reply-list">
           <div style="margin-right: 10px; display: inline-block; float: left;">
-            <router-link :to="'/user/' + reply.author.loginname"><img :src="reply.author.avatar_url" :alt="reply.author.loginname"></router-link>
+            <router-link :to="{path: '/user', query: {id: reply.author.loginname}}"><img :src="reply.author.avatar_url" :alt="reply.author.loginname"></router-link>
           </div>
           <div>
             <div>
