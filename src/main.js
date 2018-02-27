@@ -9,7 +9,7 @@ import './assets/style/main.css'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import * as filters from './filters/filter'
-import store from '../src/store'
+import store from '@/store'
 import './permission'
 
 Vue.use(VueAxios, axios)
