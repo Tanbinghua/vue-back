@@ -13,7 +13,7 @@ router.beforeEach((to, from, next) => {
     next()
   } else {
     if (store.state.user_info.loginname === '') {
-      if (!sessionStorage.getItem('accesstoken')) {
+      if (sessionStorage.getItem('accesstoken') === '') {
         next('/login')
       } else {
         let url = store.state.svrUrl + '/user/' + sessionStorage.getItem('loginname')
@@ -31,8 +31,10 @@ router.beforeEach((to, from, next) => {
         })
         next()
       }
-    } else {
+    } else if (store.state.user_info.loginname !== '' && sessionStorage.getItem('accesstoken')) {
       next()
+    } else {
+      next('/login')
     }
   }
 })

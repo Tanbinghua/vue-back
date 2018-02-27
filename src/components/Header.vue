@@ -49,7 +49,9 @@ export default {
       }
     },
     login () {
-      this.$router.push('/')
+      sessionStorage.setItem('accesstoken', '')
+      sessionStorage.setItem('loginname', '')
+      this.$router.push('/login')
     },
     message () {
       this.$message('message')
