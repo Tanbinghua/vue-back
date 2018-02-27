@@ -20,7 +20,7 @@
           <span slot="title">主要功能</span>
         </template>
         <el-menu-item-group title="vue论坛">
-          <el-menu-item :route="{path: '/forum'}" index="forum">论坛主题</el-menu-item>
+          <el-menu-item :route="{path: '/'}" index="">论坛主题</el-menu-item>
           <el-menu-item :route="{path: '/newContent'}" index="newContent">新建主题</el-menu-item>
         </el-menu-item-group>
         <el-menu-item-group title="编辑">

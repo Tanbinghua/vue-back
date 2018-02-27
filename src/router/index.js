@@ -17,7 +17,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/forum',
+      path: '/',
       component: Home,
       children: [
         { path: '/', name: 'Forum', component: Forum },
@@ -29,7 +29,7 @@ export default new Router({
         { path: '/about', name: 'About', component: About }
       ]
     },
-    { path: '/', name: 'Login', component: Login },
+    { path: '/login', name: 'Login', component: Login },
     { path: '*', redirect: '/error' },
     { path: '/error', name: Four, component: Four }
   ]

@@ -70,7 +70,7 @@ export default {
               sessionStorage.setItem('loginname', res.data.loginname)
               self.isLogin = true
               self.showMsg('登录成功', 'success')
-              this.$router.push('/forum')
+              this.$router.push('/')
             } else {
               self.showMsg('登录失败，请检查token是否正确', 'error')
             }

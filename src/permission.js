@@ -1,27 +1,40 @@
+import router from './router'
+import store from './store'
+import axios from 'axios'
+
 router.beforeEach((to, from, next) => {
-  if (store.getters.token) {
-    if (to.path === '/login') {
-      next({path: '/'})
+  if (to.path === '/login') {
+    if (sessionStorage.getItem('accesstoken')) {
+      next('/')
     } else {
-      if (store.getters.roles.length === 0) {
-        store.dispath('GetInfo').then((res) => {
-          const role = res.data.role
-          store.pispatch('GenerateRoutes', {role}).then(() => {
-            router.addRoutes(store.getters.addRoutes)
-            next({...to, replace: true})
-          })
-        }).catch((res) => {
-          console.log(res)
-        })
+      next()
+    }
+  } else if (withList.indexOf(to.path) >= 0) {
+    next()
+  } else {
+    if (store.state.user_info.loginname === '') {
+      if (!sessionStorage.getItem('accesstoken')) {
+        next('/login')
       } else {
+        let url = store.state.svrUrl + '/user/' + sessionStorage.getItem('loginname')
+        axios.get(url).then((res) => {
+          if (res.data) {
+            store.commit({
+              type: 'setUserInfo',
+              info: JSON.stringify(res.data.data)
+            })
+          } else {
+            console.log('permisson')
+          }
+        }).catch((res) => {
+          console.log('permission: ', res)
+        })
         next()
       }
-    }
-  } else {
-    if (whiteList.indexOf(to.path) !== -1) {
-      next()
     } else {
-      next('/login')
+      next()
     }
   }
 })
+
+const withList = ['/error', '/login']
