@@ -12,10 +12,10 @@ router.beforeEach((to, from, next) => {
   } else if (withList.indexOf(to.path) >= 0) {
     next()
   } else {
-    if (store.state.user_info.loginname === '') {
-      if (sessionStorage.getItem('accesstoken') === '') {
-        next('/login')
-      } else {
+    if (!sessionStorage.getItem('accesstoken') || sessionStorage.getItem('accesstoken') === '') {
+      next('/login')
+    } else {
+      if (store.state.user_info.loginname === '') {
         let url = store.state.svrUrl + '/user/' + sessionStorage.getItem('loginname')
         axios.get(url).then((res) => {
           if (res.data) {
@@ -29,12 +29,8 @@ router.beforeEach((to, from, next) => {
         }).catch((res) => {
           console.log('permission: ', res)
         })
-        next()
       }
-    } else if (store.state.user_info.loginname !== '' && sessionStorage.getItem('accesstoken')) {
       next()
-    } else {
-      next('/login')
     }
   }
 })
