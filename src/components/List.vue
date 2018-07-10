@@ -1,11 +1,9 @@
 <template>
-  <div class="sort-list">
-    <sortable-list lockAxis="y" v-model="items">
-      <sortable-item v-for="(item, index) in items" :key="index"
-        :index="index" :item="item">
-      </sortable-item>
-    </sortable-list>
-  </div>
+  <sortable-list lockAxis="y" v-model="items">
+    <sortable-item v-for="(item, index) in items" :key="index"
+      :index="index" :item="item">
+    </sortable-item>
+  </sortable-list>
 </template>
 
 <script>
