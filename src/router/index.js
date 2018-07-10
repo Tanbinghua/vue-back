@@ -20,6 +20,7 @@ export default new Router({
       ]
     },
     { path: '/login', name: 'Login', component: _import('Login') },
+    { path: '/try', name: 'Try', component: _import('Try') },
     { path: '*', redirect: '/error' },
     { path: '/error', name: 'Error', component: _import('Error') }
   ]
